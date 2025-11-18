@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProjetoCiInicialLucasgfApplication {
 
 	public static void main(String[] args) {
+		System.out.println("Iniciando aplicacao com Docker");
 		SpringApplication.run(ProjetoCiInicialLucasgfApplication.class, args);
 	}
 
