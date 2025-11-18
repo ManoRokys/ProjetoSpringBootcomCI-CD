@@ -1,4 +1,4 @@
-name: Docker CI/CD
+name: Compilar e Enviar Docker
 
 on:
   push:
@@ -10,24 +10,24 @@ on:
       - 'CONTRIBUTING.md'
 
 jobs:
-  build-and-push:
-    name: Build Docker Image and Push to Docker Hub
+  compilar-e-enviar:
+    name: Compilar imagem Docker e enviar para Docker Hub
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
+      - name: Fazer checkout do código
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
+      - name: Configurar Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login no Docker Hub
+      - name: Fazer login no Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build e Push da imagem Docker
+      - name: Compilar e enviar imagem Docker
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -39,8 +39,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Docker Image Summary
+      - name: Resumo da imagem Docker
         run: |
-          echo "✅ Docker image built and pushed successfully!"
-          echo "Image: ${{ secrets.DOCKER_USERNAME }}/projeto-spring-boot:latest"
-          echo "Image: ${{ secrets.DOCKER_USERNAME }}/projeto-spring-boot:${{ github.sha }}"
+          echo "Imagem Docker compilada e enviada com sucesso!"
+          echo "Imagem: ${{ secrets.DOCKER_USERNAME }}/projeto-spring-boot:latest"
+          echo "Imagem: ${{ secrets.DOCKER_USERNAME }}/projeto-spring-boot:${{ github.sha }}"
